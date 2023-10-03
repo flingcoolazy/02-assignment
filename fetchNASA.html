@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>NASA Bday Search</title>
+    <style>
+        body {
+            background-image: url('./a2224021cfe4b361bfa307fe6a864084.gif');
+        }
+
+        h1,
+        label,
+        p {
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <h1>NASA Bday Image</h1>
+
+    <label for="date">Enter a date (YYYY-MM-DD):</label>
+    <input type="text" id="date" name="date">
+
+    <button onclick="fetchImage()">Search</button>
+
+    <div id="image"></div>
+
+    <script>
+        const apiKey = 'IiWE7A5l5iKPFrCYDYeuGqDDRhCmilMO85daO9dH';
+
+        async function fetchImage() {
+            const date = document.getElementById('date').value;
+            const url = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&date=${date}`;
+
+            const response = await fetch(url);
+            const data = await response.json();
+
+            document.getElementById('image').innerHTML = `
+        <img src="${data.url}" width="400">
+        <p>${data.explanation}</p>
+      `;
+        }
+    </script>
+
+</body>
+
+</html>
